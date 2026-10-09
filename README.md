@@ -176,13 +176,14 @@ joblib для сериализации модели;
 
 train/test split 80/20.
 
-10) Расширяемость
+10) возможность расширяемости 
 
 SQLAlchemy 2.0 (Mapped, mapped_column) — замена SQLite на PostgreSQL без переписывания логики;
 
 замена GradientBoostingRegressor на LightGBM Ranker без изменения API;
 
 слоистая архитектура: models / schemas / routers / services / ml / core / utils.
+
 ---
 
 ##  Архитектура проекта
