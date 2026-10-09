@@ -236,3 +236,5 @@ cd gift-assistant-mvp
 docker compose up --build
 
 открыть сайл http://localhost:5173/dashboard , зарегестрироваться , загрузить каталог подарков products.csv , и заполнить данные о получателе, можно импортировать из его вк интересы
+
+демонстрация - https://disk.yandex.ru/d/all1SgeAHANpKg
