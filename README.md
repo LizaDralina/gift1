@@ -110,7 +110,7 @@ GET /auth/me — текущий пользователь по JWT;
 POST /auth/login — выдача access_token с token_type: "bearer".
 
 ### Нефункциональные требования
-Производительность
+1) Производительность
 
 время ответа мастера подбора ≤ 3 сек;
 
@@ -118,7 +118,7 @@ POST /auth/login — выдача access_token с token_type: "bearer".
 
 локальный inference ML-модели без внешних ML-сервисов.
 
-Надёжность
+2) Надёжность
 
 понятные сообщения об ошибках (400, 401, 403, 404);
 
@@ -126,7 +126,7 @@ fallback на эвристику, если ML-модель не загружен
 
 try_get_vk_groups возвращает пустой список, если группы скрыты.
 
-Безопасность
+3) Безопасность
 
 bcrypt для паролей (passlib);
 
@@ -136,17 +136,17 @@ VK Service Token в env, не в БД;
 
 контроль доступа к получателям через get_owned_recipient.
 
-Конфигурируемость
+4) Конфигурируемость
 
 все параметры через env: DATABASE_URL, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, VK_SERVICE_TOKEN, VK_API_VERSION.
 
-Валидация входных данных
+5) Валидация входных данных
 
 Pydantic v2: EmailStr, Field(ge=, le=, min_length=, max_length=);
 
 age: 0–120, budget_min ≥ 0, budget_max > 0, top_k 1–20.
 
-Нормализация данных
+6) Нормализация данных
 
 normalize_text — нижний регистр, удаление пробелов;
 
@@ -154,7 +154,7 @@ normalize_list — очистка списков;
 
 parse_tags — парсинг тегов из CSV.
 
-Контейнеризация и развёртывание
+7) Контейнеризация и развёртывание
 
 Docker для backend (Python 3.11 slim);
 
@@ -162,13 +162,13 @@ Docker Compose для совместного запуска;
 
 SQLite + Docker volume для сохранности данных.
 
-Тестируемость
+8) Тестируемость
 
 unit-тесты на pytest (22 теста);
 
 покрытие: нормализация, rule-based фильтры, генерация рекомендаций, объяснения.
 
-Воспроизводимость ML
+9) Воспроизводимость ML
 
 random_state=42 в обучении и валидации;
 
@@ -176,7 +176,7 @@ joblib для сериализации модели;
 
 train/test split 80/20.
 
-Расширяемость
+10) Расширяемость
 
 SQLAlchemy 2.0 (Mapped, mapped_column) — замена SQLite на PostgreSQL без переписывания логики;
 
