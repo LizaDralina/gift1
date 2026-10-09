@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: gift_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:////data/gift_mvp.db
+      SECRET_KEY: super-secret-key-change-me
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      VK_SERVICE_TOKEN: "a991b385a991b385a991b385c0aaaeed26aa991a991b385c0271ffc54b6e8ec4a173210"
+      VK_API_VERSION: "5.199"
+      VK_CLIENT_ID: "54484643"
+      VK_CLIENT_SECRET: "QpN0InQU9nppytJ9KSMc"
+      VK_REDIRECT_URI: "https://inspective-imperishably-sau.ngrok-free.dev/vk/callback" 
+    volumes:
+      - gift_data:/data
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8000
+    container_name: gift_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  gift_data:
